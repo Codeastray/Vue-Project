@@ -131,12 +131,12 @@ if (process.client) {
    window.addEventListener("beforeunload", reloadHandler);
 }
 onBeforeRouteLeave((to, from, next) => {
-   const answer = window.confirm('未儲存，確定要離開嗎?')
-   if (answer) {
-      next()
-   } else {
-      next(false)
-   }
+   // const answer = window.confirm('未儲存，確定要離開嗎?')
+   // if (answer) {
+   //    next()
+   // } else {
+   //    next(false)
+   // }
    window.removeEventListener("beforeunload", reloadHandler);
 })
 
