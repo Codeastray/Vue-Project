@@ -1,7 +1,7 @@
 <template>
   <div class="text-center ">
-    <NuxtLink to="/notes">
-      <button
+    <NuxtLink to="/notes" @click="checkLogin">
+      <button 
         class="start-btn text-3xl shadow-2xl mt-10 relative animate-pulse animate-infinite animate-delay-[3000ms] animate-ease-in-out animate-normal ring-8 ring-primary">
         開始記錄
       </button>
@@ -28,7 +28,7 @@
       class="smallCase w-[300px] mx-auto -ml-8 -mt-10  animate-fade-left animate-once animate-duration-[2000ms] animate-ease-in-out animate-normal animate-delay-1200"
       src="assets\css\smallCase.png" alt="">
   </div>
-  <div class=" h-[600px] overflow-hidden -mt-[600px] -ml-10 "> 
+  <div class=" h-[600px] overflow-hidden -mt-[600px] -ml-10 ">
     <img
       class="globe h-30 overflow-hidden w-[2000px]  mx-auto animate-spin animate-infinite animate-duration-[12000ms] animate-ease-linear animate-normal  max-sm:mt-[150px]"
       src="assets\css\globe.png" alt="">
@@ -36,10 +36,17 @@
 </template>
 
 <script setup>
+import getUser from '@/composables/getUser'
+const { user } = getUser()
+const router = useRouter()
+
+const checkLogin = () => {
+  if (!user.value) {
+    router.push('/login')
+  }
+}
 
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
   

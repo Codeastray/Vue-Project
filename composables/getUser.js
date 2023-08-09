@@ -14,7 +14,7 @@ const getUser = (_collection, _query) => {
         user.value = _user
         console.log("file: 登入者", user.value)
         ////////////為了解決異步問題///////////////
-        if (_collection, _query) {
+        if (_collection && _query && _user) {
 
             const getCollection = (_collection, _query) => {
 

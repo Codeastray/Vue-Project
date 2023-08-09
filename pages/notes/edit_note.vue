@@ -50,8 +50,8 @@ const photoFileName = ref('')
 const photoError = ref(null)
 const isPending = ref(false)
 const photoPreview = ref(null)
-
-const { error: storageError, uploadImage} = useStorage()
+let noteData = {}
+const { error: storageError, uploadImage, url } = useStorage()
 const { isPending: editError, error, updateTheDoc } = useDocument('travelDairy', id)
 const router = useRouter()
 
@@ -61,9 +61,39 @@ watchEffect(() => {
       location.value = note.value.location;
       noteContent.value = note.value.noteContent;
       photoFileName.value = note.value.photoFileName;
-      console.log("file: edit_note.vue:69 ~ watchEffect ~ photoFileName.value:", photoFileName.value)
+      noteData.photoUrl = url.value
    }
 });
+
+const handleSubmit = async () => {
+   isPending.value = true
+   if (photo.value) {
+      noteData = {
+         title: title.value,
+         location: location.value,
+         noteContent: noteContent.value,
+         photoUrl: url.value,
+         // userId: user.value.uid,
+         // filePath: filePath.value,
+         // createdAt: timestamp
+      }
+      await uploadImage(photo.value, photoFileName.value)
+      await updateTheDoc({
+         ...noteData
+      })
+      isPending.value = false
+   } else {
+      await updateTheDoc({
+         ...noteData
+      })
+   }
+
+   if (!error.value) {
+      // window.removeEventListener('popstate', popstateHandler);
+      //跳到note_edit.html之外的頁面
+      router.push(`/notes/${id}`)
+   }
+}
 
 const returnToPrePage = () => {
    router.push(`/notes/${note.value.id}`)
@@ -89,11 +119,12 @@ const photoCheck = (_selected) => {
    photo.value = _selected
 }
 
-
+const reloadHandler = (event) => {
+   event.returnValue = "";
+}
 if (process.client) {
    window.addEventListener("beforeunload", reloadHandler);
 }
-
 onBeforeRouteLeave((to, from, next) => {
    const answer = window.confirm('未儲存，確定要離開嗎?')
    if (answer) {
@@ -101,42 +132,8 @@ onBeforeRouteLeave((to, from, next) => {
    } else {
       next(false)
    }
-
    window.removeEventListener("beforeunload", reloadHandler);
 })
-
-const handleSubmit = async () => {
-   isPending.value = true
-   let note = {
-      title: title.value,
-      location: location.value,
-      // userId: user.value.uid,
-      noteContent: noteContent.value,
-      // filePath: filePath.value,
-      // photoUrl: url.value,
-      // createdAt: timestamp
-   }
-
-   if (photo.value) {
-      await uploadImage(photo.value, photoFileName.value)
-      await updateTheDoc({
-         ...note
-      })
-      isPending.value = false
-   } else {
-      await updateTheDoc({
-         ...note
-      })
-   }
-
-   if (!error.value) {
-      // window.removeEventListener('popstate', popstateHandler);
-      //跳到note_edit.html之外的頁面
-      router
-         .push({ path: `/notes/${id}` })
-         .then(() => { router.go() })
-   }
-}
 
 const handleFileChanged = (e) => {
    const selected = e.target.files[0]
@@ -158,6 +155,4 @@ const onDrop = (e) => {
 }
 
 </script>
-<style  scoped>
-
-</style>
+<style  scoped></style>

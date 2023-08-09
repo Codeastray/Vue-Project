@@ -63,7 +63,6 @@ const router = useRouter()
 const { error: delError, isPending, deleteTheDoc } = useDocument('travelDairy', id)
 const { deleteFile } = useStorage()
 const centerStore = useCenterStore()
-
 const returnToPrePage = () => {
     router.push('/notes/')
 }
