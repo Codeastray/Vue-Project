@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Lubri";
+    src: url("@/assets/fonts/W3.ttc") format("truetype");
+  }
+  /* global style */
+  * {
+    font-family: "Lubri";
+    @apply text-xl;
+    button {
+      @apply text-2xl ml-4 rounded-md p-2 shadow-lg;
+      &:hover {
+        @apply ring-offset-2 ring-2 ring-cyan-200 bg-primary  animate-jump animate-once animate-duration-500;
+      }
+    }
+    .note-card{
+      @apply px-4 border-8 border-primary shadow-lg w-64 max-h-[480px] max-sm:m-auto max-sm:w-[360px] rounded-xl overflow-hidden m-2;
+      &:hover {
+        @apply -translate-y-1 hover:scale-105
+      }
+    }
+  }
+  body {
+    @apply overflow-y-scroll bg-gray-50 ;
+  }
+}
+
+@layer components {
+    /* NavBar */
+    nav {
+      @apply  w-full h-full flex flex-row justify-between items-center shadow-lg max-sm:shadow-none;
+      div > a
+      {
+        @apply text-2xl ml-4 rounded-md p-2 shadow-lg;
+        &:hover {
+          @apply ring-offset-2 ring-2 ring-cyan-200 bg-primary  animate-jump animate-once animate-duration-500;
+        }
+      }
+    }
+  /* Login & Signup Page*/
+  .form-control {
+    @apply flex flex-col space-y-12 w-3/6 mx-auto bg-white drop-shadow-lg p-12 border-8 mt-10 max-sm:space-y-6 border-primary rounded-md max-sm:w-full;
+    input {
+      @apply text-3xl border-b-2 outline-none;
+    }
+    button {
+      @apply text-4xl border-2 rounded-md mx-auto px-2;
+      &:hover {
+        @apply bg-green-100 shadow-md;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .start-btn {
+    @apply max-sm:m-0 max-sm:mt-4
+  } 
+  .wallet {
+    @apply max-sm:m-0 max-sm:mt-0 max-sm:ml-6 
+  } 
+  .photo {
+    @apply max-sm:m-0 max-sm:mt-6 
+  } 
+  .ticket {
+    @apply max-sm:m-0 max-sm:mt-6 max-sm:-ml-6 
+  } 
+  .camera {
+    @apply max-sm:m-0 max-sm:mb-96  max-sm:ml-6 
+  } 
+  .case  {
+    @apply max-sm:m-0 max-sm:absolute max-sm:w-36 max-sm:ml-[100px]  max-sm:mt-20
+  } 
+  .smallCase {
+    @apply max-sm:m-0 max-sm:-mt-[20px] max-sm:ml-[100px] 
+  } 
+  .globe  {
+    @apply max-sm:ml-5 
+  } 
+  /* .start-btn {
+    @apply max-sm:m-0 max-sm:mt-4
+  }  */
+}
+
+/* Error */
+.error {
+  @apply text-white text-2xl bg-red-400  rounded-md mx-auto p-2;
+}
