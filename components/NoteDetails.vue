@@ -55,7 +55,7 @@ import useDocument from '@/composables/useDocument';
 import useStorage from '@/composables/useStorage';
 import { useCenterStore } from '@/stores/centerStore';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow/index'
-import locale_zhTW from 'date-fns/locale/zh-TW'
+import locale_zhTW from 'date-fns/locale/zh-TW/index'
 
 const { id } = useRoute().params
 const { error, document: note } = getDocument('travelDairy', id)
