@@ -17,7 +17,7 @@
                         <span class="text-2xl">點擊選擇圖片</span> 
                         <span class="max-sm:hidden block text-center">或拖曳圖片</span>
                     </p>
-                    <p class=" text-base text-gray-500 dark:text-gray-400"> PNG, JPG (MAX. 200KB)</p>
+                    <p class=" text-base text-gray-500 dark:text-gray-400"> PNG, JPG (MAX. 1MB)</p>
                 </div>
                 <input @change="handleFileChanged" id="dropzone-file" type="file" class="hidden" />
             </label>
@@ -32,21 +32,27 @@
 <script setup>
 import useStorage from '@/composables/useStorage'
 import useSignup from '@/composables/useSignup';
+import { useCenterStore } from '@/stores/centerStore';
 
+const centerStore = useCenterStore()
 const email = ref('')
 const password = ref('')
 const displayName = ref('')
 const thumbnailPreview = ref(null)
 const thumbnail = ref(null)
 const thumbnailError = ref(null)
-const { error, isPending, signup } = useSignup()
+const { error, isPending, signup, url } = useSignup()
 const { error: storageError } = useStorage()
 const router = useRouter()
+
+
+
 
 const handleSubmit = async () => {
     await signup(email.value, password.value, displayName.value, thumbnail.value)
     if (!error.value) {
-        router.push('/')
+        centerStore.userPhotoUrl = url.value 
+        router.push('/') 
     }
 }
 
@@ -57,8 +63,8 @@ const thumbnailCheck = (_selected) => {
         thumbnailError.value = '檔案必須是png或jpeg圖片類型'
         return
     }
-    if (_selected.size > 200000) {
-        thumbnailError.value = '檔案大小要小於200KB'
+    if (_selected.size > 1000000) {
+        thumbnailError.value = '檔案大小要小於1MB'
         return
     }
     const reader = new FileReader()
@@ -68,7 +74,6 @@ const thumbnailCheck = (_selected) => {
     reader.readAsDataURL(_selected)
     thumbnailError.value = null
     thumbnail.value = _selected
-    console.log("file: create_note.vue:92 ~ thumbnailCheck ~ thumbnail.value:", thumbnail.value)
 }
 
 const handleFileChanged = (e) => {

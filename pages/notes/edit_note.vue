@@ -83,6 +83,11 @@ const handleSubmit = async () => {
       })
       isPending.value = false
    } else {
+      noteData = {
+         title: title.value,
+         location: location.value,
+         noteContent: noteContent.value,
+      }
       await updateTheDoc({
          ...noteData
       })

@@ -5,14 +5,13 @@ import useStorage from '@/composables/useStorage'
 
 const error = ref(null)
 const isPending = ref(false)
-const { url, uploadImage, } = useStorage()
+const { url, uploadImage } = useStorage()
 
 const signup = async (email, password, displayName, thumbnail) => {
     error.value = null
     isPending.value = true
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password)
-        console.log("🚀 ~ file: useSignup.js:18 ~ signup ~ res:", res)
         if (!res) {
             throw new Error('無法註冊')
         }
@@ -30,7 +29,7 @@ const signup = async (email, password, displayName, thumbnail) => {
 }
 
 const useSignup = () => {
-    return { error, isPending, signup }
+    return { error, isPending, signup , url}
 }
 
 export default useSignup

@@ -19,7 +19,7 @@
                   <div v-if="user" class="flex  cursor-pointer mr-16 max-sm:m-0 items-center">
                      <span class="hidden max-sm:inline max-sm:ml-0  max-sm:text-2xl ">現在就去<span
                            class=" text-4xl text-emerald-400">旅行</span>!!!</span>
-                     <img :src="user.photoURL" ref="menu"
+                     <img :src="user.photoURL || centerStore.userPhotoUrl" ref="menu"
                         class="w-12 h-12 object-cover rounded-full max-sm:ml-3 max-sm:mb-2" @click="toggleHandler" alt="">
                   </div>
                   <!-- Dropdown menu -->
@@ -27,7 +27,7 @@
                      class="absolute right-0 z-20 w-56 py-2 mr-4 mt-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800">
                      <div class="transform origin-top transition-transform">
                         <div class="flex items-center p-4 -mt-2">
-                           <img v-if="user" :src="user.photoURL" class="w-12 h-12 object-cover rounded-full block" alt="">
+                           <img v-if="user" :src="user.photoURL || centerStore.userPhotoUrl" class="w-12 h-12 object-cover rounded-full block" alt="">
                            <h5 class="ml-2 text-5xl">{{ user.displayName }}</h5>
                         </div>
                         <hr class="border-gray-200 dark:border-gray-700 ">
@@ -48,7 +48,9 @@ import { signOut } from 'firebase/auth'
 import getUser from '@/composables/getUser'
 import useLogin from '@/composables/useLogin'
 import useSignup from '@/composables/useSignup'
+import { useCenterStore } from '@/stores/centerStore';
 
+const centerStore = useCenterStore()
 const menuShow = ref(false)
 const { user } = getUser()
 const { error } = useLogin()
@@ -62,6 +64,7 @@ const handleLogout = () => {
    menuShow.value = false
 }
 
+console.log("file: NavBar.vue:67 ~ centerStore:", centerStore.photoURL)
 const toggleHandler = () => {
    menuShow.value = !menuShow.value
 }
