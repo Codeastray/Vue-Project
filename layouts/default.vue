@@ -1,16 +1,12 @@
 <template>
-  <div class="overflow-hidden">
-  <NavBar class="sticky top-0 bg-white z-20"/>
-  <div class=" container w-full mx-auto ">
-    <slot />
-  </div>
-</div>
+   <div class="overflow-hidden">
+      <NavBar class="sticky top-0 z-20 bg-white" />
+      <div class="container mx-auto w-full">
+         <slot />
+      </div>
+   </div>
 </template>
 
-<script setup>
+<script setup></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>
