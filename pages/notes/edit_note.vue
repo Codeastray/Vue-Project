@@ -50,6 +50,7 @@ const photoFileName = ref('')
 const photoError = ref(null)
 const isPending = ref(false)
 const photoPreview = ref(null)
+
 let noteData = {}
 const { error: storageError, uploadImage, url } = useStorage()
 const { isPending: editError, error, updateTheDoc } = useDocument('travelDairy', id)
@@ -101,7 +102,7 @@ const handleSubmit = async () => {
 }
 
 const returnToPrePage = () => {
-   router.push(`/notes/${note.value.id}`)
+   router.push(`/notes/${id}`)
 }
 
 const photoCheck = (_selected) => {
@@ -125,20 +126,22 @@ const photoCheck = (_selected) => {
 }
 
 const reloadHandler = (event) => {
+   window.removeEventListener("beforeunload", reloadHandler);
    event.returnValue = "";
 }
 if (process.client) {
    window.addEventListener("beforeunload", reloadHandler);
 }
-onBeforeRouteLeave((to, from, next) => {
-   // const answer = window.confirm('未儲存，確定要離開嗎?')
-   // if (answer) {
-   //    next()
-   // } else {
-   //    next(false)
-   // }
-   window.removeEventListener("beforeunload", reloadHandler);
-})
+// onBeforeRouteLeave((to, from, next) => {
+//    const answer = window.confirm('未儲存，確定要離開嗎?')
+//    if (answer) {
+//       next()
+//    } else {
+//       next(false)
+//    }
+ 
+
+// })
 
 const handleFileChanged = (e) => {
    const selected = e.target.files[0]
