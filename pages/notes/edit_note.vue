@@ -102,7 +102,12 @@ const handleSubmit = async () => {
 }
 
 const returnToPrePage = () => {
-   router.push(`/notes/${id}`)
+   const answer = window.confirm('未儲存，確定要離開嗎?')
+   if (answer) {
+      router.push(`/notes/${id}`)
+   } else {
+      return
+   }
 }
 
 const photoCheck = (_selected) => {
@@ -126,23 +131,23 @@ const photoCheck = (_selected) => {
 }
 
 const reloadHandler = (event) => {
-   window.removeEventListener("beforeunload", reloadHandler);
+
    event.returnValue = "";
 }
 if (process.client) {
    window.addEventListener("beforeunload", reloadHandler);
 }
-// onBeforeRouteLeave((to, from, next) => {
-//    const answer = window.confirm('未儲存，確定要離開嗎?')
-//    if (answer) {
-//       next()
-//    } else {
-//       next(false)
-//    }
- 
 
-// })
+onBeforeUnmount(() => {
+   // const answer = window.confirm('未儲存，確定要離開嗎?')
+   // if (answer) {
+   //    router.push(`/notes/${id}`)
+   // } else {
+      
+   // }
 
+   window.removeEventListener("beforeunload", reloadHandler);
+})
 const handleFileChanged = (e) => {
    const selected = e.target.files[0]
    if (!selected) {
