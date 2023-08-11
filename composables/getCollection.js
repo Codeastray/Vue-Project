@@ -22,12 +22,10 @@ const getCollection = (_collection, _query) => {
             doc.data().createdAt && results.push({ ...doc.data(), id: doc.id }) //有timestamp才會抓取
          })
          documents.value = results
-         console.log('file: getCollection.js:23 ~ unsub ~ documents.value:', documents.value)
          error.value = null
       },
       err => {
          documents.value = null
-         console.log('file: getCollection.js:27 ~ unsub ~ documents.value:', documents.value)
          error.value = '無法取得檔案'
       },
    )

@@ -29,7 +29,7 @@
    const router = useRouter()
    const handleSubmit = async () => {
       centerStore.addQuerykeyword(query.value)
-      console.log('file: SearchBar.vue:32 ~ handleSubmit ~  centerStore.center:', centerStore.center)
+      
       router.push('/notes/search')
    }
 </script>

@@ -29,8 +29,6 @@ const getDocument = (_collection, id, _query) => {
    watchEffect(onInvalidate => {
       onInvalidate(() => unsub())
    })
-   console.log('file: getDocument.js:32 ~ getDocument ~ ocument:', document)
-
    return { document, error }
 }
 
