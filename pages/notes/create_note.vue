@@ -91,7 +91,7 @@
          return
       }
 
-      const reader = new FileReader()
+      const reader = new FileReader() //要預覽選擇的圖片，要透過FileReader讀取
       reader.onload = e => {
          photoPreview.value = e.target.result
       }
