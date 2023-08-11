@@ -13,6 +13,7 @@
       <div class="flex flex-row">
          <div v-if="!user" class="mr-10 flex flex-row max-sm:-mt-2 max-sm:mb-4 max-sm:mr-4">
             <NuxtLink @click="signupError = false" to="/signup" class="ring-2 ring-primary">註冊</NuxtLink>
+            <NuxtLink @click="error = false, menuShow = false" to='/login' class=" ring-2 ring-primary">登入</NuxtLink> 
          </div>
          <div v-if="user" class="flex">
             <div class="flex max-sm:mb-3 max-sm:ml-2">
