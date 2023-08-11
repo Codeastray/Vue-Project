@@ -63,7 +63,7 @@
    import useSignup from '@/composables/useSignup'
    import { useCenterStore } from '@/stores/centerStore'
 
-   const centerStore = useCenterStore()
+   const centerStore = useCenterStore() //使用Pinia
    const menuShow = ref(false)
    const { user } = getUser()
    const { error } = useLogin()
@@ -76,20 +76,20 @@
       menuShow.value = false
    }
    const toggleHandler = () => {
-      menuShow.value = !menuShow.value
+      menuShow.value = !menuShow.value //開關user面板，用來登出
    }
 
-   const closeMenuOnClickOutside = event => {
+   const closeMenuOnClickOutside = event => { //點擊面板以外的地方，面板會關閉
       if (menu.value && !menu.value.contains(event.target)) {
          menuShow.value = false
       }
    }
 
-   onMounted(() => {
+   onMounted(() => { //掛載Dom後，加入點擊事件監聽，若有點擊動作執行function
       document.addEventListener('click', closeMenuOnClickOutside)
    })
 
-   onBeforeUnmount(() => {
+   onBeforeUnmount(() => { //卸載Dom前(離開頁面前)，取消點擊事件監聽
       document.removeEventListener('click', closeMenuOnClickOutside)
    })
 </script>
