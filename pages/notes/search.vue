@@ -32,10 +32,5 @@
          notes.value = filteredNotes.value
       }
    })
-
-   // const { documents: notes, error } = getCollection(
-   //     'travelDairy',
-   //     ['userId', '==', 'user.value.uid' ]
-   // )
 </script>
 <style scoped></style>

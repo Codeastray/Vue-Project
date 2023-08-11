@@ -26,7 +26,7 @@ const useDocument = (_collection, id) => {
       try {
          const res = await updateDoc(docRef, updates)
          isPending.value = false
-         return res //之後可能會用到
+         return res
       } catch (err) {
          error.value = '無法更新文章'
          isPending.value = false

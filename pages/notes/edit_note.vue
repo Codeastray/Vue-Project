@@ -102,8 +102,6 @@
       }
 
       if (!error.value) {
-         // window.removeEventListener('popstate', popstateHandler);
-         //跳到note_edit.html之外的頁面
          router.push(`/notes/${id}`)
       }
    }
@@ -145,12 +143,7 @@
    }
 
    onBeforeUnmount(() => {
-      // const answer = window.confirm('未儲存，確定要離開嗎?')
-      // if (answer) {
-      //    router.push(`/notes/${id}`)
-      // } else {
-
-      // }
+     
 
       window.removeEventListener('beforeunload', reloadHandler)
    })

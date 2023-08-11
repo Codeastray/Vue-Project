@@ -26,17 +26,13 @@
    </div>
 </template>
 <script setup>
-   // import getCollection from '@/composables/getCollection';
    const { note } = defineProps(['note'])
    import useDocument from '@/composables/useDocument'
    import useStorage from '@/composables/useStorage'
 
    const { deleteFile } = useStorage()
    const router = useRouter()
-   // const { documents: notes, error } = getCollection(
-   //     'travelDairy',
-   //     ['userId', '==', 'user.value.uid' ]
-   // )
+
 
    const handleDelete = async note => {
       if (confirm('確定要刪除這篇札記?')) {

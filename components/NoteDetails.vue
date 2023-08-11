@@ -51,7 +51,7 @@
          arrow_back
       </span>
    </button>
-   <!-- 以下先在伺服端渲染傳出，等待客戶端完成前先上 -->
+
 </template>
 <script setup>
    import useDocument from '@/composables/useDocument'
