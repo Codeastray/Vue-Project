@@ -45,13 +45,6 @@
 
    const linkToDetail = id => {
       router.push(`/notes/${id}`)
-      // navigateTo({
-      //     path: `/notes/${id}`
-      // }, {
-      //     open: {
-      //         target: '_blank'
-      //     }
-      // })
    }
 </script>
 <style scoped></style>
