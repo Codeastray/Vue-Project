@@ -16,9 +16,9 @@ const signup = async (email, password, displayName, thumbnail) => {
          throw new Error('無法註冊')
       }
       if (thumbnail) {
-         await uploadImage(thumbnail)
+         await uploadImage(thumbnail)//上傳頭像
       }
-      await updateProfile(res.user, { displayName, photoURL: url.value })
+      await updateProfile(res.user, { displayName, photoURL: url.value }) //更新user中的資料，不是document的
       error.value = null
       isPending.value = false
    } catch (err) {

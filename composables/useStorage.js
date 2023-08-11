@@ -37,7 +37,7 @@ const useStorage = () => {
    const deleteFile = async path => {
       const imageRef = storageRef(storage, path)
       try {
-         await deleteObject(imageRef)
+         await deleteObject(imageRef) //刪除Storage中的圖片資源
       } catch (err) {
          error.value = err.message
       }

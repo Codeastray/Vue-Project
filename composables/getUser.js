@@ -31,7 +31,7 @@ const getUser = (_collection, _query) => {
                   let results = []
                   snapshot.docs.forEach(doc => {
                      doc.data().createdAt && results.push({ ...doc.data(), id: doc.id }) //有timestamp才會抓取
-                  })
+                  })                                      //...doc.data()是原本的資料
                   documents.value = results
                   docus.value = documents.value
                   error.value = null

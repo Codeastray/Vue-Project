@@ -66,8 +66,6 @@
    const { error: delError, isPending, deleteTheDoc } = useDocument('travelDairy', id)
    const { deleteFile } = useStorage()
    const centerStore = useCenterStore()
-   console.log('file: NoteDetails.vue:67 ~ note.photoUrl.value:', note.photoUrl)
-   console.log('file: NoteDetails.vue:67 ~ note:', note)
    const returnToPrePage = () => {
       router.push('/notes/')
    }

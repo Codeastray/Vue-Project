@@ -28,8 +28,7 @@
    const query = ref('')
    const router = useRouter()
    const handleSubmit = async () => {
-      centerStore.addQuerykeyword(query.value)
-      
+      centerStore.addQuerykeyword(query.value) //接收search bar中輸入的關鍵字，傳到store，然後在search.vue中使用filter
       router.push('/notes/search')
    }
 </script>

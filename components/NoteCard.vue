@@ -26,18 +26,13 @@
    </div>
 </template>
 <script setup>
-   // import getCollection from '@/composables/getCollection';
    const { note } = defineProps(['note'])
    import useDocument from '@/composables/useDocument'
    import useStorage from '@/composables/useStorage'
 
    const { deleteFile } = useStorage()
    const router = useRouter()
-   // const { documents: notes, error } = getCollection(
-   //     'travelDairy',
-   //     ['userId', '==', 'user.value.uid' ]
-   // )
-
+  
    const handleDelete = async note => {
       if (confirm('確定要刪除這篇札記?')) {
          const { error: delError, isPending, deleteTheDoc } = useDocument('travelDairy', note.id)
@@ -49,7 +44,7 @@
 
    const linkToDetail = id => {
       router.push(`/notes/${id}`)
-      // navigateTo({
+      // navigateTo({           //開啟新網頁，但是手機會引起按back button後，返回上一頁沒有uid的問題
       //     path: `/notes/${id}`
       // }, {
       //     open: {

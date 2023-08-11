@@ -8,13 +8,13 @@ const getCollection = (_collection, _query) => {
 
    let collecitonRef = collection(db, _collection)
 
-   if (_query) {
+   if (_query) { //如果有設定Query參數
       collecitonRef = query(collecitonRef, where(..._query), orderBy('createdAt'))
    } else {
       collecitonRef = query(collecitonRef, orderBy('createdAt'))
    }
 
-   const unsub = onSnapshot(
+   const unsub = onSnapshot( //unsub是onSnapshot(即時監聽資料更新渲染功能)，如果執行unsub()就會取消監聽 
       collecitonRef,
       snapshot => {
          let results = []
@@ -30,7 +30,7 @@ const getCollection = (_collection, _query) => {
       },
    )
 
-   watchEffect(onInvalidate => {
+   watchEffect(onInvalidate => { //當unmount後watchEffect會無效，並執行onInvalidate函數內的unsub來取消onSnapshot監聽
       onInvalidate(() => unsub())
    })
 
